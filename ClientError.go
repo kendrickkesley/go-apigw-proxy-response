@@ -79,3 +79,16 @@ func PreconditionFailed() (events.APIGatewayProxyResponse, error) {
 		StatusCode: 412,
 	}, nil
 }
+
+//Locked return 423 code
+func Locked() (events.APIGatewayProxyResponse, error) {
+	return events.APIGatewayProxyResponse{
+		Body:            "Locked",
+		IsBase64Encoded: false,
+		Headers: map[string]string{
+			"Content-Type":                "text/plain",
+			"Access-Control-Allow-Origin": "*",
+		},
+		StatusCode: 423,
+	}, nil
+}
