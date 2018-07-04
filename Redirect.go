@@ -18,14 +18,11 @@ func Redirect() (events.APIGatewayProxyResponse, error) {
 //RedirectWithLocation return 300 code and move to a location
 func RedirectWithLocation(location string) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
-		Body:            "Redirect",
-		IsBase64Encoded: false,
 		Headers: map[string]string{
-			"Content-Type":                "text/plain",
 			"Access-Control-Allow-Origin": "*",
 			"Location":                    location,
 		},
-		StatusCode: 300,
+		StatusCode: 301,
 	}, nil
 }
 
