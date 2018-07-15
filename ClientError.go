@@ -6,6 +6,13 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+const (
+	//BadRequestRequired error code for required fields
+	BadRequestRequired = "REQUIRED"
+	//BadRequestDuplicate error code for duplicate fields
+	BadRequestDuplicate = "DUPLICATE"
+)
+
 //BadRequest return 400 code
 func BadRequest() (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
