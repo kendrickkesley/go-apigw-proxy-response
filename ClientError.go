@@ -1,6 +1,10 @@
 package response
 
-import "github.com/aws/aws-lambda-go/events"
+import (
+	"encoding/json"
+
+	"github.com/aws/aws-lambda-go/events"
+)
 
 //BadRequest return 400 code
 func BadRequest() (events.APIGatewayProxyResponse, error) {
@@ -9,6 +13,23 @@ func BadRequest() (events.APIGatewayProxyResponse, error) {
 		IsBase64Encoded: false,
 		Headers: map[string]string{
 			"Content-Type":                "text/plain",
+			"Access-Control-Allow-Origin": "*",
+		},
+		StatusCode: 400,
+	}, nil
+}
+
+//BadRequestWithCode return 400 code
+func BadRequestWithCode(codes []string) (events.APIGatewayProxyResponse, error) {
+	resByte, err := json.Marshal(codes)
+	if err != nil {
+		return ServerError(err)
+	}
+	return events.APIGatewayProxyResponse{
+		Body:            string(resByte[:]),
+		IsBase64Encoded: false,
+		Headers: map[string]string{
+			"Content-Type":                "application/json",
 			"Access-Control-Allow-Origin": "*",
 		},
 		StatusCode: 400,
