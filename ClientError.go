@@ -20,7 +20,7 @@ func BadRequest() (events.APIGatewayProxyResponse, error) {
 }
 
 //BadRequestWithCode return 400 code
-func BadRequestWithCode(codes []string) (events.APIGatewayProxyResponse, error) {
+func BadRequestWithCode(codes map[string]string) (events.APIGatewayProxyResponse, error) {
 	resByte, err := json.Marshal(codes)
 	if err != nil {
 		return ServerError(err)
