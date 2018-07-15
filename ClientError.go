@@ -11,6 +11,8 @@ const (
 	BadRequestRequired = "REQUIRED"
 	//BadRequestDuplicate error code for duplicate fields
 	BadRequestDuplicate = "DUPLICATE"
+	//BadRequestInvalid error code for invalid fields
+	BadRequestInvalid = "INVALID"
 )
 
 //BadRequest return 400 code
