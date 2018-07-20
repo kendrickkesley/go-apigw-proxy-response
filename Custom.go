@@ -12,9 +12,8 @@ func Custom(code int, message string, err error) (events.APIGatewayProxyResponse
 		Body:            message,
 		IsBase64Encoded: false,
 		Headers: map[string]string{
-			"Content-Type":                 "text/plain",
-			"Access-Control-Allow-Origin":  "*",
-			"Access-Control-Allow-Headers": "TZ, Authorization",
+			"Content-Type":                "text/plain",
+			"Access-Control-Allow-Origin": "*",
 		},
 		StatusCode: code,
 	}, err
