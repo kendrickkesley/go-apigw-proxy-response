@@ -21,19 +21,10 @@ func Custom(code int, message string, err error) (events.APIGatewayProxyResponse
 }
 
 //CustomJSON return custom code and message
-func CustomJSON(code int, responseObject interface{}, err error) (events.APIGatewayProxyResponse, error) {
+func CustomJSON(code int, responseObject interface{}, extErr error) (events.APIGatewayProxyResponse, error) {
 	resByte, err := json.Marshal(responseObject)
 	if err != nil {
 		return ServerError(err)
 	}
-	return events.APIGatewayProxyResponse{
-		Body:            string(resByte[:]),
-		IsBase64Encoded: false,
-		Headers: map[string]string{
-			"Content-Type":                 "application/json",
-			"Access-Control-Allow-Origin":  "*",
-			"Access-Control-Allow-Headers": "TZ, Authorization",
-		},
-		StatusCode: code,
-	}, err
+	return Custom(code, string(resByte), extErr)
 }
