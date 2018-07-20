@@ -11,6 +11,8 @@ const (
 	BadRequestDuplicate = "DUPLICATE"
 	//BadRequestInvalid error code for invalid fields
 	BadRequestInvalid = "INVALID"
+	//BadRequestNoMatch error code for no matching found
+	BadRequestNoMatch = "NO_MATCH"
 )
 
 //BadRequest return 400 code
