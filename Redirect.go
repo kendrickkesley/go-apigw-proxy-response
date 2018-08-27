@@ -1,6 +1,11 @@
 package response
 
-import "github.com/aws/aws-lambda-go/events"
+import (
+	"fmt"
+	"os"
+
+	"github.com/aws/aws-lambda-go/events"
+)
 
 //Redirect return 300 code
 func Redirect() (events.APIGatewayProxyResponse, error) {
@@ -9,6 +14,7 @@ func Redirect() (events.APIGatewayProxyResponse, error) {
 
 //RedirectWithLocation return 300 code and move to a location
 func RedirectWithLocation(location string) (events.APIGatewayProxyResponse, error) {
+	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", 301, location)
 	return events.APIGatewayProxyResponse{
 		Headers: map[string]string{
 			"Access-Control-Allow-Origin": "*",

@@ -2,12 +2,15 @@ package response
 
 import (
 	"encoding/json"
+	"fmt"
+	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 )
 
 //Custom return custom code and message
 func Custom(code int, message string, err error) (events.APIGatewayProxyResponse, error) {
+	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, message)
 	return events.APIGatewayProxyResponse{
 		Body:            message,
 		IsBase64Encoded: false,
@@ -21,6 +24,7 @@ func Custom(code int, message string, err error) (events.APIGatewayProxyResponse
 
 //CustomJSON return custom code and message
 func CustomJSON(code int, responseObject interface{}, extErr error) (events.APIGatewayProxyResponse, error) {
+	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, responseObject)
 	resByte, err := json.Marshal(responseObject)
 	if err != nil {
 		return ServerError(err)
