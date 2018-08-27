@@ -24,10 +24,10 @@ func Custom(code int, message string, err error) (events.APIGatewayProxyResponse
 
 //CustomJSON return custom code and message
 func CustomJSON(code int, responseObject interface{}, extErr error) (events.APIGatewayProxyResponse, error) {
-	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, responseObject)
 	resByte, err := json.Marshal(responseObject)
 	if err != nil {
 		return ServerError(err)
 	}
+	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, string(resByte))
 	return Custom(code, string(resByte), extErr)
 }
