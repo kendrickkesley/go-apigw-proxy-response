@@ -22,7 +22,7 @@ func Custom(code int, message string, err error) (events.APIGatewayProxyResponse
 			"Access-Control-Allow-Origin": "*",
 		},
 		StatusCode: code,
-	}, err
+	}, nil
 }
 
 //CustomJSON return custom code and message
