@@ -10,6 +10,9 @@ import (
 
 //Custom return custom code and message
 func Custom(code int, message string, err error) (events.APIGatewayProxyResponse, error) {
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "ERROR: %+v", err)
+	}
 	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, message)
 	return events.APIGatewayProxyResponse{
 		Body:            message,
@@ -28,6 +31,5 @@ func CustomJSON(code int, responseObject interface{}, extErr error) (events.APIG
 	if err != nil {
 		return ServerError(err)
 	}
-	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, string(resByte))
 	return Custom(code, string(resByte), extErr)
 }
