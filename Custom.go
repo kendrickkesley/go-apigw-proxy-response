@@ -11,7 +11,7 @@ import (
 //Custom return custom code and message
 func Custom(code int, message string, err error) (events.APIGatewayProxyResponse, error) {
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "ERROR: %+v", err)
+		fmt.Fprintf(os.Stderr, "ERROR: %+v\n", err)
 	}
 	fmt.Fprintf(os.Stderr, "RESPONSE-%d: %s", code, message)
 	return events.APIGatewayProxyResponse{
