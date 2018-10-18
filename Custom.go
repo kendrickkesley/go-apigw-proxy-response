@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/kkesley/go-apigw-httpparser"
+
 	"github.com/aws/aws-lambda-go/events"
 )
 
@@ -31,5 +33,14 @@ func CustomJSON(code int, responseObject interface{}, extErr error) (events.APIG
 	if err != nil {
 		return ServerError(err)
 	}
-	return Custom(code, string(resByte), extErr)
+	httpparser.LogResponse(code, responseObject)
+	return events.APIGatewayProxyResponse{
+		Body:            string(resByte),
+		IsBase64Encoded: false,
+		Headers: map[string]string{
+			"Content-Type":                "text/plain",
+			"Access-Control-Allow-Origin": "*",
+		},
+		StatusCode: code,
+	}, nil
 }
